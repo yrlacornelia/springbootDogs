@@ -6,5 +6,12 @@
 </head>
 <body>
 <h1>All owners with its dog</h1>
+<div th:each="owner : ${owners}">
+    <h3 th:text="${owner.name}"></h3>
+    <div th:each="dog : ${owner.dogs}">
+        <h2 th:text="${dog.name}"></h2>
+
+    </div>
+</div>
 </body>
 </html>

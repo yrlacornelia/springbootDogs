@@ -21,28 +21,27 @@ public class mvcController {
     DogRepository dogRepository;
     @Autowired
     OwnerRepository ownerRepository;
+
+    @GetMapping("")
+    String firstPage(Model model) {
+        return "firstPageView";
+    }
     @GetMapping("/allDogs")
     String renderAllDogs(Model model) {
-        logger.info("Rendering all dogs");
         List<Dog> dogList = (List)dogRepository.findAll();
         model.addAttribute("dogs", dogList);
         return "allDogsView";
     }
     @GetMapping("/allOwners")
     String renderAllOwners(Model model) {
-       /* List<Owner> ownerList = new ArrayList<>();
-        ownerList.add(new Owner("Pluto"));
-        ownerList.add(new Owner("Ludde"));
-        ownerList.add(new Owner("Chicco"));*/
         List<Owner> ownerList = (List)ownerRepository.findAll();
         model.addAttribute( "owners", ownerList);
-
         return "allOwnersView";
 
     }
     @GetMapping("/allOwnersWithItsDog")
     String renderAllOwnersWithItsDogs(Model model) {
-        List<Owner> ownerList = (List)ownerRepository.findAll();
+        List<Owner> ownerList = (List)ownerRepository.findOwnersWithDogs();
         model.addAttribute( "owners", ownerList);
         return "allOwnersWithItsDog";
     }
@@ -52,16 +51,30 @@ public class mvcController {
         model.addAttribute( "dog", dog);
         return "oneDog";
     }
+    @GetMapping("/availableDogs")
+    String renderAvailableDogs(Model model) {
+        List<Dog> dogList = (List)dogRepository.dogsWithoutOwner();
+        model.addAttribute("dogs", dogList);
+        return "availableDogs";
+    }
+    @GetMapping("/availableOwners")
+    String renderAvailableOwners(Model model) {
+        List<Owner> ownerList = (List)ownerRepository.ownerWithoutDogs();
+        model.addAttribute("owners", ownerList);
+        return "availableOwners";
+    }
 
-    // all dogs
+    // all dogs x
     // all owners x
-    // all owners and its dogs
-    // all avaliable dogs
-    // owners without dogs
+    // all owners and its dogs x (dont show dogs without owners or opposite) x
+    // all avaliable dogs  ( no dogs that has an owner) x
+    // owners without dogs  ( no owners that has a dog) x
 
-    // man ska kunna ha en ensam person utan hund
-    // man ska kunna ha en hund ensam
-    // man ska kunna ha en person med hundar
+    // snyggare sida
+    // filter
+    // adopt sheet
+
+
 
 }
 
