@@ -3,9 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
-<h1> Adopt a dog!! </h1>
+<div class="heading">
+    <div class="nav">
+        <div class="container"> <h3>Logo</h3> </div>
+        <div class="container"><ul>
+            <li>Home</li> <li>About us</li> <li>Admin</li>
+        </ul> </div>
+        <div class="container"></div>
+    </div>
+    <div class="hero">
+        <div class="heroText"><h1>Adopt a dog <br> today!</h1>  <p>Lorem ipsum dolor sit amet consectetur. Ipsum dui sagittis sed morbi tellus commodo tortor. <br> Lorem ipsum dolor sit amet consectetur.  dui smodo tortor. Dolor sit amet consectetur. Ipsumtortor.</p></div>
+        <form>
+            <h3>AdoptionRequest</h3>
+            <div class="formContainer">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="hej svensson"> <br>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="hej.hej@hotmail.com"> <br>
+            <label for="dogs">Dog</label>
+            <select name="dogs" id="dogs" >
+                <option disabled  selected>Choose dog</option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+            </select><br>
 
+                <label for="text">About me</label>
+                <textarea rows="7" cols="50" name="comment" id="text"> Enter text here...</textarea>
+            <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="divider"></div>
+<div>
+    <div class="dogContain">
+    <h4>Available dogs 137</h4>
+    <div class="dogsContainer">
+
+        <div class="dogBox">
+            <img src="" alt="no image right now">
+            <h3>Duffy</h3>
+            <p>Golden retriver</p>
+            <button>view profile ></button>
+        </div>
+        <div class="dogBox">
+            <img src="" alt="no image right now">
+            <h3>Duffy</h3>
+            <p>Golden retriver</p>
+            <button>view profile ></button>
+        </div>
+        <div class="dogBox">
+            <img src="" alt="no image right now">
+            <div class="boxText">
+                <h3>Duffy</h3>
+                <p>Golden retriver</p>
+                <button>view profile ></button>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</div>
 </body>
 </html>
