@@ -2,9 +2,18 @@ body{
     margin: 0;
     font-family: Inter, sans-serif;
 }
+li{
+    list-style-type: none;
+}
+button {
+    border: none;
+    padding: 12px;
+    box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+
+}
 .heading{
 background-color: #F7DAD9;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
 }
 
 .nav{
@@ -12,6 +21,7 @@ background-color: #F7DAD9;
     justify-content: center;
     width: 100%;
 }
+
 .container{
     width: 33%;
     display: flex;
@@ -20,7 +30,6 @@ background-color: #F7DAD9;
 }
 .container ul{
     display: flex;
-    list-style-type: none;
     gap: 30px;
     font-weight: bold;
 }
@@ -28,9 +37,13 @@ background-color: #F7DAD9;
   text-decoration: underline;
     cursor: pointer;
 }
+.container a{
+    text-decoration: none;
+    color: black;
+}
 
 .hero{
-    margin: 20vh auto auto auto;
+    margin: 10vh auto auto auto;
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -44,6 +57,8 @@ width: 30%;}
 .heroText p{
     opacity: 0.75;
 }
+
+/*form */
 form{
     width: 30%;
     background-color: white;
@@ -54,6 +69,7 @@ form{
     gap: 5px;
     padding: 10px;
     padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 .formContainer{
     display: flex;
@@ -90,6 +106,8 @@ form h3 {font-size: 30px; font-weight: normal;}
 form select{
 
 }
+
+/*available dogs first page  */
 .divider{
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
@@ -103,23 +121,110 @@ form select{
     margin:auto;
 }
 .dogsContainer{
-display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
-.dogBox{
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    flex: 1;
-    height: 40vh;
-
-}
-.dogBox img{
-    border: 1px solid green;
+.plan img{
+    object-fit: cover;
     width: 100%;
-    height: 20vh;
+    height: 320px;
 }
-.boxText p{
+
+.plan {
+    max-width: 320px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+}
+
+.plan .inner {
+    align-items: center;
+    padding: 5px 20px 20px 20px;
+    position: relative;
+}
+.plan .title {
+    font-size: 1.25rem;
+}
+.plan .info
+{font-weight: lighter;
     color: #817B7B;
 }
-.boxText h2{
-    font-size: 20px;
+
+.plan .action {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.plan .button {
+    background-color: #6558d3;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.125rem;
+    text-align: center;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    padding: 0.625em 0.75em;
+    text-decoration: none;
+}
+
+.plan .button:hover, .plan .button:focus {
+    background-color: #4133B7;
+}
+
+
+
+/* settings */
+
+.settingsContainer{
+    display: flex;
+}
+.settingsNav{
+     display: flex;
+     flex-direction: column;
+     width: 15%;
+     height: 65vh;
+     box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+     padding: 30px;
+     gap: 10px;
+ }
+.settingsNav button{
+    text-align: left;
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+    color: #656270;
+    border-radius: 10px;
+}
+.settingsNav button:hover, .settingsContainer button:focus {
+    background-color: #4133B7;
+    color:white;
+}
+.settingsInfo{
+    box-shadow: 0px 10px 60px rgba(226, 236, 249, 0.5);
+    margin: auto;
+    width: 65%;
+    margin-top: 10vh;
+    height: 55vh;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
 }

@@ -10,21 +10,46 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Controller
 public class mvcController {
-    private static final Logger logger = LoggerFactory.getLogger(mvcController.class);
-
-    @Autowired
+      @Autowired
     DogRepository dogRepository;
     @Autowired
     OwnerRepository ownerRepository;
 
     @GetMapping("")
     String firstPage(Model model) {
+        List<Dog> dogList = (List)dogRepository.dogsWithoutOwner();
+        model.addAttribute("dogs", dogList);
         return "firstPageView";
+    }
+    @GetMapping("/adminPageView")
+    String adminPage( String tableName, Model model) {
+        if(tableName == null) {
+            tableName = "person";
+        }
+        List<?> data = null;
+        switch (tableName){
+            case "dog":
+          data = dogRepository.dogsWithoutOwner();
+                break;
+            case "person":
+           data = (List)ownerRepository.findAll();
+                break;
+        }
+
+        model.addAttribute("data", data);
+        return "adminPageView";
+    }
+    @GetMapping("/aboutUsView")
+    String aboutUs(Model model) {
+        List<Dog> dogList = (List)dogRepository.dogsWithoutOwner();
+        model.addAttribute("dogs", dogList);
+        return "aboutUsView";
     }
     @GetMapping("/allDogs")
     String renderAllDogs(Model model) {
@@ -64,15 +89,6 @@ public class mvcController {
         return "availableOwners";
     }
 
-    // all dogs x
-    // all owners x
-    // all owners and its dogs x (dont show dogs without owners or opposite) x
-    // all avaliable dogs  ( no dogs that has an owner) x
-    // owners without dogs  ( no owners that has a dog) x
-
-    // snyggare sida
-    // filter
-    // adopt sheet
 
 
 
