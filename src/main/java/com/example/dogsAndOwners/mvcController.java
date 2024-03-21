@@ -3,8 +3,6 @@ import com.example.dogsAndOwners.entity.Dog;
 import com.example.dogsAndOwners.entity.Owner;
 import com.example.dogsAndOwners.repository.DogRepository;
 import com.example.dogsAndOwners.repository.OwnerRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,10 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class mvcController {
-      @Autowired
+    @Autowired
     DogRepository dogRepository;
     @Autowired
     OwnerRepository ownerRepository;
@@ -28,23 +27,23 @@ public class mvcController {
         return "firstPageView";
     }
     @GetMapping("/adminPageView")
-    String adminPage( String tableName, Model model) {
-        if(tableName == null) {
-            tableName = "person";
-        }
+    public String showAdminPage(@RequestParam("selectedButton") String selectedButton, Model model) {
         List<?> data = null;
-        switch (tableName){
-            case "dog":
-          data = dogRepository.dogsWithoutOwner();
+        switch (selectedButton){
+            case "1":
+                data = dogRepository.dogsWithoutOwner();
                 break;
-            case "person":
-           data = (List)ownerRepository.findAll();
+            case "2":
+                data = (List)ownerRepository.findAll();
                 break;
         }
 
+        model.addAttribute("tableName", selectedButton);
         model.addAttribute("data", data);
         return "adminPageView";
     }
+
+
     @GetMapping("/aboutUsView")
     String aboutUs(Model model) {
         List<Dog> dogList = (List)dogRepository.dogsWithoutOwner();
@@ -76,7 +75,37 @@ public class mvcController {
         model.addAttribute( "dog", dog);
         return "oneDog";
     }
-    @GetMapping("/availableDogs")
+    @GetMapping("/editDog/{id}")
+    String editDog(Model model, @PathVariable Long id) {
+        Dog dog = dogRepository.findById(id).get();
+        model.addAttribute( "dog", dog);
+        return "editDog";
+    }
+/*    @PostMapping("/update/{id}")
+    public String updateUser(@PathVariable("id") long id, Model model) {
+        if (result.hasErrors()) {
+            user.setId(id);
+            return "update-user";
+        }
+
+        userRepository.save(user);
+        return "redirect:/index";
+    }*/
+
+    @GetMapping("/deleteDog/{id}")
+    public String deleteDog(@PathVariable("id") long id, Model model) {
+        Dog dog = dogRepository.findById(id).get();
+        dogRepository.delete(dog);
+        return "redirect:/";
+    }
+    @GetMapping("/updateDog/{id}")
+    public String updateDog(@PathVariable("id") long id, Model model) {
+        Dog dog = dogRepository.findById(id).get();
+        dogRepository.delete(dog);
+        return "redirect:/";
+    }
+
+/*    @GetMapping("/availableDogs")
     String renderAvailableDogs(Model model) {
         List<Dog> dogList = (List)dogRepository.dogsWithoutOwner();
         model.addAttribute("dogs", dogList);
@@ -87,7 +116,7 @@ public class mvcController {
         List<Owner> ownerList = (List)ownerRepository.ownerWithoutDogs();
         model.addAttribute("owners", ownerList);
         return "availableOwners";
-    }
+    }*/
 
 
 

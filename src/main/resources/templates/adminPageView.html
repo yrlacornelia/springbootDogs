@@ -23,54 +23,61 @@
 <div class="settingsContainer">
 <div class="settingsNav">
   <h3>Settings</h3>
+  <form th:action="@{/adminPageView}" method="get">
+    <button type="submit" name="selectedButton" value="1">Dogs</button>
+    <button type="submit" name="selectedButton" value="2">Owners</button>
+  </form>
 
-    <form action="/adminPageView" method="get">
-      <button type="submit" name="tableName" value="dog">Dogs</button>
-    </form>
-    <form action="/adminPageView" method="get">
-      <button type="submit" name="tableName" value="person">Owners</button>
-    </form>
   <button>Requests</button>
   <button>Dogs</button>
   <button>Owners</button>
+
 </div>
-<div class="settingsInfo">
-  <div class="dogSetting" th:if="${tableName == dog}" >
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Breed</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="dog : ${data}">
-        <td th:text="${dog.name}"></td>
-        <td th:text="${dog.age}"></td>
-        <td th:text="${dog.breed}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="personSettings" th:if="${tableName == 'person'}">
-    <table>
-      <thead>
-      <tr>
-        <th>Name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="person : ${data}">
-        <td th:text="${person.name}"></td>
-      </tr>
-      </tbody>
-    </table>
+
+  <div class="settingsInfo">
+    <div class="dogSetting" th:if="${tableName == '1'}" >
+
+      <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Breed</th>
+          <th>Id</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dog : ${data}">
+          <td th:text="${dog.name}"></td>
+          <td th:text="${dog.age}"></td>
+          <td th:text="${dog.breed}"></td>
+          <td th:text="${dog.id}"></td>
+          <td >
+            <a th:href="@{/editDog/{id}(id=${dog.id})}">edit</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <button> <a href="/createDog">add dog</a></button>
+    </div>
+    <div class="personSettings" th:if="${tableName == '2'}">
+      <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person : ${data}">
+          <td th:text="${person.name}"></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
 
   </div>
-
-  </div>
-
 </div>
 
 </body>
