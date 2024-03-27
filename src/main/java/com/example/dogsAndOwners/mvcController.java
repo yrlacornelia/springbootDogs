@@ -6,9 +6,8 @@ import com.example.dogsAndOwners.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -104,7 +103,23 @@ public class mvcController {
         dogRepository.delete(dog);
         return "redirect:/";
     }
+    @GetMapping("/createDog")
+    public String createDog(Model model) {
+        model.addAttribute("formdata", new CreateDogFormData());
 
+        return "createDog";
+    }
+
+    @PostMapping("/createDog")
+    public String postCreateDog( @ModelAttribute("formdata") CreateDogFormData dog,
+                                BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            return "/createDog";
+        }
+        dogRepository.save(dog.toEntity());
+        return "redirect:/";
+
+    }
 /*    @GetMapping("/availableDogs")
     String renderAvailableDogs(Model model) {
         List<Dog> dogList = (List)dogRepository.dogsWithoutOwner();

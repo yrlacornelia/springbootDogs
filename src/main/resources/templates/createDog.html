@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<p>create dog </p>
+<h1>Form</h1>
+<form action="#" th:action="@{/createDog}" th:objects="${formdata}" method="post" >
+<label for="name"  >name</label>
+    <input type="text" id="name" th:field="*{formdata.name}" placeholder="hej svensson"> <br>
+
+    <label for="age"  >age</label>
+    <input type="text" id="age" th:field="*{formdata.age}" placeholder="0"> <br>
+
+    <input type="submit" value="Submit" />
+
+</form>
+
 </body>
 </html>
