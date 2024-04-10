@@ -3,15 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
 <body>
 <h1>dog:</h1>
-<p th:text="${dog.name}"></p>
-<p th:text="${dog.age}"></p>
-<p th:text="${dog.breed}"></p>
-<a class="button" th:href="@{/deleteDog/{id}(id=${dog.id})}">
-    delete
-</a>
-<a>save</a>
+
+<form method="post" action="/uploadWithDogId" enctype="multipart/form-data">
+    <input type="hidden" name="dogId" th:value="${formData.id}"> <!-- Replace '1' with the actual dogId value -->
+    <div class="form-group">
+        <input type="file" name="image" accept="image/*" class="form-control-file">
+    </div>
+    <button type="submit" class="btn btn-primary">Upload image</button>
+    <img th:if="${imageData != null}" class="dogimage" th:src="'data:image/jpeg;base64,' + ${imageData}" alt="Dog Image">
+
+</form>
+
+<form action="#" th:action="@{/editDog/{id}(id=${formData.id})}"  th:object="${formData}" method="post">
+    <p>
+        <label for="name">Title</label>
+        <input id="name" type="text" th:field="*{name}"/>
+    <p th:if="${#fields.hasErrors('name')}"
+       th:text="${#strings.listJoin(#fields.errors('name'), ', ')}"></p>
+
+    <p>
+        <!--        <label for="chatMessage" th:text="${formData.chatMessage} + ':'"/>-->
+        <label for="age">Message</label>
+        <input id="age" type="text" th:field="*{age}"/>
+    <p th:if="${#fields.hasErrors('age')}"
+       th:text="${#strings.listJoin(#fields.errors('age'), ', ')}"></p>
+    </p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+
 </body>
 </html>

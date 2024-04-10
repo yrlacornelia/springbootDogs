@@ -228,3 +228,11 @@ th, td {
 th {
     background-color: #f2f2f2;
 }
+
+.imagecontainer{
+
+}
+.dogimage{
+    width: 200px;
+    height: 200px;
+}

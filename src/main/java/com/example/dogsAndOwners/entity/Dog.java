@@ -17,17 +17,21 @@ public class Dog {
     @Column(name = "Age")
     private int age;
 
+    @Column(name = "Image_data")
+    @Lob
+    private byte[] imageData;
     @ManyToOne
     @JoinColumn(name = "OwnerID") // This ensures the foreign key relationship is correctly mapped.
     private Owner owner;
 
     public Dog() {
     }
-
-    public Dog(String name, String breed, int age) {
+    public Dog(String name, String breed, int age, byte[] imageData) {
         this.name = name;
         this.breed = breed;
         this.age = age;
+        this.imageData = imageData;
+
     }
 
     public String getBreed() {
@@ -60,6 +64,14 @@ public class Dog {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 
     @Override

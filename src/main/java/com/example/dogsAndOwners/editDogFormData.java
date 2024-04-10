@@ -1,14 +1,16 @@
 package com.example.dogsAndOwners;
 
-import com.example.dogsAndOwners.entity.Dog;
 import jakarta.persistence.Lob;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class CreateDogFormData {
+public class editDogFormData {
 
+    @NotNull
+    private Long id;
+    @NotNull
     @Size(min = 1, max = 100 )
     private String name;
     @Min(0)
@@ -16,14 +18,28 @@ public class CreateDogFormData {
     private Integer age;
     @Lob
     private byte[] imageData;
-    public CreateDogFormData(String name, int age, byte[] imageData) {
-        this.imageData = imageData;
-        this.name = name;
-        this.age = age;
+
+    public editDogFormData() {
     }
 
-    public CreateDogFormData(){
+    public editDogFormData(Long id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
 
+    }
+
+    public editDogFormData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -48,14 +64,5 @@ public class CreateDogFormData {
 
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
-    }
-
-    public Dog toEntity(){
-        var dog = new Dog();
-        if (age != null) {        dog.setAge(age);}
-        if (name != null) {        dog.setName(name);}
-
-
-        return dog;
     }
 }

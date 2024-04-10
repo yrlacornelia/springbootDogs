@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+
 </head>
 <body>
 <h1>dog:</h1>
 <h1 th:text="${dog?.name}" ></h1>
+
+<img th:if="${dog.id != null}" th:src="@{'/dog/' + ${dog.id} + '/image'}" alt="Dog Image">
+
 </body>
 </html>
